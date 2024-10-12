@@ -8,9 +8,9 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var jwtSecret = []byte(os.Getenv("JWT_SECRET"))
-
 func JWTAuthMiddleware(next http.Handler) http.Handler {
+	jwtSecret := []byte(os.Getenv("JWT_SECRET"))
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		tokenString := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
 
